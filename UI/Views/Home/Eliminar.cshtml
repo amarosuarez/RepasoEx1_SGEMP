@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using ENT
+@model clsMision
+
+<div class="container">
+    @if (ViewBag.Mensaje == null)
+    {
+        <h2>¿Estás seguro de que quieres eliminar esta misión?</h2>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Nombre</h5>
+                <p class="card-text">@Model.Descripcion</p>
+                <p><strong>Recompensa:</strong> @Model.Recompensa créditos</p>
+            </div>
+        </div>
+
+        <!-- Formulario para eliminar la misión -->
+        <form method="post" class="mt-3">
+            <button type="submit" class="btn btn-danger">Eliminar Misión</button>
+            <a href="@Url.Action("Index", "")" class="btn btn-secondary">Cancelar</a>
+        </form>
+    }
+
+    <!-- Si la misión fue eliminada, mostrar el mensaje -->
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert mt-3">
+            <strong>@ViewBag.Mensaje</strong>
+        </div>
+
+        <!-- Botón para volver al listado -->
+        <a href="@Url.Action("Index", "")" class="btn btn-primary mt-2">Volver al listado</a>
+    }
+</div>
+
+

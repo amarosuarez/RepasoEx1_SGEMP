@@ -1,0 +1,32 @@
+﻿@using ENT
+@model clsMision
+
+<div class="container">
+    <h2>Añadir Misión</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="Nombre">Nombre de la Misión</label>
+            <input type="text" id="Nombre" name="Nombre" class="form-control" value="@Model?.Nombre" required />
+        </div>
+
+        <div class="form-group">
+            <label for="Descripcion">Descripción</label>
+            <textarea id="Descripcion" name="Descripcion" class="form-control" required>@Model?.Descripcion</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="Recompensa">Recompensa</label>
+            <input type="number" id="Recompensa" name="Recompensa" class="form-control" value="@Model?.Recompensa" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+
+    <a href="@Url.Action("Index", "")" class="btn btn-secondary mt-3">Volver al listado</a>
+
+    @if (ViewBag.Mensaje != null)
+    {
+        <p>@ViewBag.Mensaje</p>
+    }
+</div>

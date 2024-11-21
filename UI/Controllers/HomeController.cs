@@ -47,15 +47,41 @@ namespace UI.Controllers
             {
                 clsMision mision = clsListadoMisionBL.buscarMisionPorId(id);
 
-                clsListadoMisionVM listadoMisionVM = new clsListadoMisionVM(mision);
+                if (mision == null)
+                {
+                    result = View("Error");
+                } else
+                {
+                    clsListadoMisionVM listadoMisionVM = new clsListadoMisionVM(mision);
 
-                result = View(listadoMisionVM);
+                    result = View(listadoMisionVM);
+                }
+
+                
             } catch(Exception ex)
             {
                 result = View("Error");
             }
 
             return result;
+        }
+
+        public IActionResult Insertar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Insertar(clsMision mision)
+        {
+            Boolean insertado = clsListadoMisionBL.insertarMision(mision);
+            ViewBag.Mensaje = "No se pudo añadir la misión";
+
+            if (insertado)
+            {
+                ViewBag.Mensaje = "Misión añadida";
+            }
+            return View(mision);
         }
 
         public IActionResult Editar(int id)
@@ -80,7 +106,13 @@ namespace UI.Controllers
         [HttpPost]
         public IActionResult Eliminar(clsMision mision)
         {
-            clsListadoMisionBL.eliminarMision(mision.Id);
+            Boolean eliminado = clsListadoMisionBL.eliminarMision(mision.Id);
+            ViewBag.Mensaje = "No se pudo eliminar";
+
+            if (eliminado)
+            {
+                ViewBag.Mensaje = "Eliminado correctamente";
+            }
             return View(mision);
         }
 

@@ -32,7 +32,7 @@ namespace BL
         /// </summary>
         /// <param name="id">Id de la misión a buscar</param>
         /// <returns>Mision</returns>
-        public static clsMision? buscarMisionPorId(int id)
+        public static clsMision buscarMisionPorId(int id)
         {
             return clsListadoMisionDAL.buscarMisionPorId(id);
         }
