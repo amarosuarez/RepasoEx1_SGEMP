@@ -1,0 +1,100 @@
+ENT
+---------------------------------------------
+	clsMision:
+		- id: int {get; set;}
+		- nombre: string {get; set;}
+		- descripcion: string {get; set;}
+		- recompensa: int {get; set;}
+
+		public clsMision() {}
+
+		public clsMision(id: int, nombre: string, descripcion: string, recompensa: int) {}
+
+DAL
+--------------------------------------------
+	clsListadoMisionDAL:
+		private static List<clsMision> misiones
+
+		public static List<clsMision> obtenerMisiones() { return misiones }
+
+		public static clsMision buscarMisionPorId(id: int) {}
+
+		public static boolean insertarMision(mision: clsMision) {}
+
+		public static boolean editarMision(mision: clsMision) {}
+
+		public static boolean borrarMision(id: int) {}
+
+		private int siguienteId() {}
+		
+
+BL
+--------------------------------------------
+	clsListadoMisionBL:
+		public static List<clsMision> obtenerMisiones() { return misiones }
+
+		public static clsMision buscarMisionPorId(id: int) {}
+
+		public static boolean insertarMision(mision: clsMision) {}
+
+		public static boolean editarMision(mision: clsMision) {}
+
+		public static boolean borrarMision(id: int) {}
+
+UI
+-------------------------------------------
+	VM:
+		clsListadoMisionVM : clsMision:
+			- mision: List<clsMision> {get;}
+
+			public clsListadoMisionVM() {
+				mision = clsListadoMisionBL.obtenerMisiones()
+			}
+
+			public clsVistaMisionesVM(clsMisionENT mision)
+			 : this()
+			{
+				// Actualizamos el model con los datos de la misión
+				this.id = mision.id;
+				this.nombre = mision.nombre;
+				this.descripcion = mision.descripcion;
+				this.recompensa = mision.recompensa;
+			}
+
+	Controller:
+		Misiones:
+			Index():
+				return View(clsListadoMisionVM)
+
+			[HttpPost]
+			Index(int id):
+				return View(clsListadoMisionVM)
+
+			Insertar():
+				return View()
+
+			[HttPost]
+			Insertar(clsMision mision):
+				ViewBag.salida //Mensaje de éxito o de error
+				return View(mision)
+
+			Editar(int id):
+				clsMision mision = clsMetodosMision.buscarMisionPorId(id)
+				return View(mision)
+
+			[HttPost]
+			Editar(clsMision mision):
+				ViewBag.salida //Mensaje de éxito o de error
+				return View(mision)
+
+			Eliminar(int id):
+				clsMision mision = clsMetodosMision.buscarMisionPorId(id)
+				return View(mision)
+
+			[HttPost]
+			Eliminar(clsMision mision):
+				ViewBag.salida //Mensaje de éxito o de error
+				return View(mision)
+				
+
+			
