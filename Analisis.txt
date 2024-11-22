@@ -51,9 +51,10 @@ UI
 				mision = clsListadoMisionBL.obtenerMisiones()
 			}
 
-			public clsVistaMisionesVM(clsMisionENT mision)
+			public clsVistaMisionesVM(int id)
 			 : this()
 			{
+				clsMision mision = clsListadoBL.obtenerMisionPorId(id)
 				// Actualizamos el model con los datos de la misión
 				this.id = mision.id;
 				this.nombre = mision.nombre;

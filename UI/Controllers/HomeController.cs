@@ -28,8 +28,8 @@ namespace UI.Controllers
                 result = View(listadoMisionVM);
             } catch(HourException e)
             {
-                ViewBag.Error = e;
-                result = View("HourException");
+                ViewBag.Error = e.Message;
+                result = View("FueraHora");
             } catch(Exception e)
             {
                 result = View("Error");
@@ -45,14 +45,13 @@ namespace UI.Controllers
 
             try
             {
-                clsMision mision = clsListadoMisionBL.buscarMisionPorId(id);
 
-                if (mision == null)
+                if (id == null)
                 {
                     result = View("Error");
                 } else
                 {
-                    clsListadoMisionVM listadoMisionVM = new clsListadoMisionVM(mision);
+                    clsListadoMisionVM listadoMisionVM = new clsListadoMisionVM(id);
 
                     result = View(listadoMisionVM);
                 }

@@ -20,8 +20,9 @@ namespace UI.Models.VM
             misiones = clsListadoMisionBL.obtenerMisiones();
         }
 
-        public clsListadoMisionVM(clsMision mision) : this()
+        public clsListadoMisionVM(int id) : this()
         {
+            clsMision mision = clsListadoMisionBL.buscarMisionPorId(id);
             this.Id = mision.Id;
             this.Nombre = mision.Nombre;
             this.Descripcion = mision.Descripcion;
